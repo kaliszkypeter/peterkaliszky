@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { ExternalLink, Briefcase, GraduationCap } from "lucide-react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ExternalLink, Briefcase, GraduationCap, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Experience } from "@shared/schema";
 
@@ -78,18 +78,36 @@ const education = [
 export function ExperienceSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
-    <section id="experience" className="py-20 sm:py-32 px-6 gradient-mesh">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="py-24 sm:py-32 px-6 relative overflow-hidden">
+      <motion.div 
+        className="absolute inset-0 gradient-mesh"
+        style={{ y: backgroundY }}
+      />
+      
+      <div className="max-w-6xl mx-auto relative">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="font-serif text-3xl sm:text-4xl font-semibold mb-4">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
+          />
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
             Experience & Education
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -98,25 +116,38 @@ export function ExperienceSection() {
         </motion.div>
 
         {/* Work Experience */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <Briefcase className="h-5 w-5 text-muted-foreground" />
+        <div className="mb-20">
+          <motion.div 
+            className="flex items-center gap-3 mb-10"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="p-2 rounded-lg bg-foreground/5 border border-foreground/10">
+              <Briefcase className="h-5 w-5 text-foreground/70" />
+            </div>
             <h3 className="font-serif text-xl font-semibold">Work Experience</h3>
-          </div>
+          </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative pl-6 border-l-2 border-border"
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                className="relative pl-8 border-l border-foreground/10"
               >
-                <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                <motion.div 
+                  className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-foreground/30 border-2 border-background"
+                  whileHover={{ scale: 1.5 }}
+                />
                 
-                <div className="glass-card p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
+                <motion.div 
+                  className="glass-card p-6 sm:p-8 glow-border group"
+                  whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
                     <div>
                       <h4 className="font-semibold text-lg">{exp.role}</h4>
                       <div className="flex items-center gap-2 text-muted-foreground">
@@ -125,14 +156,14 @@ export function ExperienceSection() {
                           href={`https://${exp.location}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-foreground transition-colors"
+                          className="hover:text-foreground transition-colors inline-flex items-center gap-1"
                           data-testid={`link-company-${exp.id}`}
                         >
-                          <ExternalLink className="h-3 w-3" />
+                          <ArrowUpRight className="h-3 w-3" />
                         </a>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="shrink-0">
+                    <Badge variant="secondary" className="shrink-0 bg-foreground/5 border-foreground/10">
                       {exp.period}
                     </Badge>
                   </div>
@@ -141,31 +172,36 @@ export function ExperienceSection() {
                     {exp.description.map((desc, i) => (
                       <li
                         key={i}
-                        className="text-sm text-muted-foreground flex items-start gap-2"
+                        className="text-sm text-muted-foreground flex items-start gap-3"
                       >
-                        <span className="mt-1.5 w-1 h-1 rounded-full bg-muted-foreground shrink-0" />
+                        <span className="mt-2 w-1 h-1 rounded-full bg-foreground/30 shrink-0" />
                         {desc}
                       </li>
                     ))}
                   </ul>
 
                   {exp.achievements && (
-                    <div className="pt-4 border-t border-border">
-                      <p className="text-sm font-medium mb-2">Key Achievements:</p>
-                      <ul className="space-y-1">
+                    <motion.div 
+                      className="pt-4 border-t border-foreground/10"
+                      initial={{ opacity: 0 }}
+                      animate={isInView ? { opacity: 1 } : {}}
+                      transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                    >
+                      <p className="text-sm font-medium mb-3">Key Achievements</p>
+                      <ul className="space-y-2">
                         {exp.achievements.map((achievement, i) => (
                           <li
                             key={i}
-                            className="text-sm text-muted-foreground flex items-start gap-2"
+                            className="text-sm text-muted-foreground flex items-start gap-3"
                           >
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-foreground/50 shrink-0" />
                             {achievement}
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   )}
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -173,10 +209,17 @@ export function ExperienceSection() {
 
         {/* Education */}
         <div>
-          <div className="flex items-center gap-3 mb-8">
-            <GraduationCap className="h-5 w-5 text-muted-foreground" />
+          <motion.div 
+            className="flex items-center gap-3 mb-10"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <div className="p-2 rounded-lg bg-foreground/5 border border-foreground/10">
+              <GraduationCap className="h-5 w-5 text-foreground/70" />
+            </div>
             <h3 className="font-serif text-xl font-semibold">Education</h3>
-          </div>
+          </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-6">
             {education.map((edu, index) => (
@@ -184,13 +227,14 @@ export function ExperienceSection() {
                 key={edu.degree}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="glass-card p-6"
+                transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className="glass-card p-6 glow-border"
               >
-                <h4 className="font-semibold mb-1">{edu.degree}</h4>
+                <h4 className="font-semibold mb-2">{edu.degree}</h4>
                 <p className="text-muted-foreground text-sm">{edu.school}</p>
                 <p className="text-muted-foreground text-sm">
-                  {edu.location} • {edu.period}
+                  {edu.location} · {edu.period}
                 </p>
               </motion.div>
             ))}

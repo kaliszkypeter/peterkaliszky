@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { MapPin, Mail, ArrowDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { MapPin, Mail, ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const roles = [
@@ -14,6 +14,11 @@ export function Hero() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
+  const y = useTransform(scrollY, [0, 400], [0, 50]);
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
@@ -47,14 +52,44 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 gradient-mesh">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 gradient-mesh" />
+      <motion.div 
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-foreground/[0.02] blur-3xl"
+        animate={{ 
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-foreground/[0.02] blur-3xl"
+        animate={{ 
+          x: [0, -40, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
+      
+      <motion.div 
+        style={{ opacity, scale, y }}
+        className="max-w-4xl mx-auto text-center relative z-10"
+      >
+        {/* Decorative line */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.1 }}
+          className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-8"
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 glow-text">
             Peter Kaliszky
           </h1>
         </motion.div>
@@ -62,20 +97,26 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="h-12 sm:h-14 md:h-16 mb-6"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="h-12 sm:h-14 md:h-16 mb-8"
         >
-          <span className="font-serif text-2xl sm:text-3xl md:text-4xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-muted-foreground">
             {displayText}
-            <span className="text-muted-foreground animate-pulse">|</span>
+            <motion.span 
+              className="text-foreground/40"
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              |
+            </motion.span>
           </span>
         </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed"
         >
           Product Owner with 6+ years of experience turning complex payment systems 
           into seamless digital products. Passionate about discovery, strategy, 
@@ -85,17 +126,17 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
-          <div className="flex items-center gap-2 text-muted-foreground">
+          <div className="flex items-center gap-2 text-muted-foreground text-sm">
             <MapPin className="h-4 w-4" />
             <span>Budapest, Hungary</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground" />
+          <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/50" />
           <a
             href="mailto:kaliszky.peter@gmail.com"
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="flex items-center gap-2 text-muted-foreground text-sm hover:text-foreground transition-colors duration-300"
             data-testid="link-email"
           >
             <Mail className="h-4 w-4" />
@@ -106,41 +147,58 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button
             size="lg"
             onClick={scrollToWork}
-            className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white border-0"
+            className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
             data-testid="button-view-work"
           >
-            View My Work
+            <span className="relative">
+              View My Work
+              <motion.span
+                className="absolute -right-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+              >
+                <Sparkles className="h-3 w-3" />
+              </motion.span>
+            </span>
           </Button>
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button
               variant="outline"
               size="lg"
-              className="backdrop-blur-sm"
+              className="backdrop-blur-sm px-8"
               data-testid="button-get-in-touch"
             >
               Get in Touch
             </Button>
           </a>
         </motion.div>
-      </div>
+
+        {/* Decorative line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mt-12"
+        />
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
         >
-          <ArrowDown className="h-6 w-6 text-muted-foreground" />
+          <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">Scroll</span>
+          <ArrowDown className="h-4 w-4 text-muted-foreground/60" />
         </motion.div>
       </motion.div>
     </section>

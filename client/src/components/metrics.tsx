@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 interface Metric {
   value: number;
@@ -74,18 +74,39 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
 export function Metrics() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.8]);
 
   return (
-    <section id="work" className="py-20 sm:py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="work" className="py-24 sm:py-32 px-6 relative overflow-hidden">
+      {/* Decorative elements */}
+      <motion.div 
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1 }}
+      />
+      
+      <motion.div style={{ opacity }} className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="font-serif text-3xl sm:text-4xl font-semibold mb-4">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
+          />
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
             Impact & Results
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -97,20 +118,37 @@ export function Metrics() {
           {metrics.map((metric, index) => (
             <motion.div
               key={metric.label}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center p-6 rounded-2xl glass-card"
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="text-center p-6 sm:p-8 rounded-2xl glass-card glow-border group"
             >
-              <AnimatedNumber value={metric.value} suffix={metric.suffix} />
-              <h3 className="font-medium mt-2 mb-1">{metric.label}</h3>
+              <motion.div
+                initial={{ scale: 0.8 }}
+                animate={isInView ? { scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1, type: "spring" }}
+              >
+                <AnimatedNumber value={metric.value} suffix={metric.suffix} />
+              </motion.div>
+              <h3 className="font-medium mt-3 mb-1 group-hover:text-foreground transition-colors">
+                {metric.label}
+              </h3>
               <p className="text-sm text-muted-foreground">
                 {metric.description}
               </p>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
+      
+      {/* Bottom decorative line */}
+      <motion.div 
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
     </section>
   );
 }

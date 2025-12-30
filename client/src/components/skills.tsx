@@ -81,7 +81,7 @@ export function Skills() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card rounded-xl p-6 border border-card-border"
+              className="glass-card p-6"
             >
               <h3 className="font-semibold mb-4">{category.name}</h3>
               <div className="flex flex-wrap gap-2">
@@ -104,7 +104,7 @@ export function Skills() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-card rounded-xl p-6 border border-card-border"
+          className="glass-card p-6"
         >
           <h3 className="font-semibold mb-4">
             Professional Development & Learning

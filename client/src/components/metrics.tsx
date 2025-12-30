@@ -100,7 +100,7 @@ export function Metrics() {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center p-6 rounded-2xl bg-card border border-card-border"
+              className="text-center p-6 rounded-2xl glass-card"
             >
               <AnimatedNumber value={metric.value} suffix={metric.suffix} />
               <h3 className="font-medium mt-2 mb-1">{metric.label}</h3>

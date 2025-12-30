@@ -32,7 +32,11 @@ export function Contact() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <a href="mailto:kaliszky.peter@gmail.com">
-            <Button size="lg" data-testid="button-email-contact">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white border-0"
+              data-testid="button-email-contact"
+            >
               <Mail className="mr-2 h-4 w-4" />
               Send an Email
             </Button>

@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   { label: "Work", href: "/#work" },
   { label: "Experience", href: "/#experience" },
-  { label: "Skills", href: "/#skills" },
+  { label: "AI", href: "/#ai" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -43,7 +43,7 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
+          ? "glass-subtle"
           : "bg-transparent"
       }`}
     >

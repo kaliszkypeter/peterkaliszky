@@ -80,7 +80,7 @@ export function ExperienceSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-20 sm:py-32 px-6 bg-muted/30">
+    <section id="experience" className="py-20 sm:py-32 px-6 gradient-mesh">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -115,7 +115,7 @@ export function ExperienceSection() {
               >
                 <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                 
-                <div className="bg-card rounded-xl p-6 border border-card-border">
+                <div className="glass-card p-6">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
                     <div>
                       <h4 className="font-semibold text-lg">{exp.role}</h4>
@@ -185,7 +185,7 @@ export function ExperienceSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="bg-card rounded-xl p-6 border border-card-border"
+                className="glass-card p-6"
               >
                 <h4 className="font-semibold mb-1">{edu.degree}</h4>
                 <p className="text-muted-foreground text-sm">{edu.school}</p>

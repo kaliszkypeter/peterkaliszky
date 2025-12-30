@@ -20,7 +20,7 @@ export function BlogPreview() {
   const latestPosts = posts?.slice(0, 3) || [];
 
   return (
-    <section className="py-20 sm:py-32 px-6 bg-muted/30">
+    <section className="py-20 sm:py-32 px-6 gradient-mesh">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}

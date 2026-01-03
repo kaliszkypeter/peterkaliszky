@@ -106,7 +106,7 @@ export function Contact() {
           className="flex items-center justify-center gap-8 text-muted-foreground"
         >
           <motion.a
-            href="https://linkedin.com/in/peterkaliszky"
+            href="https://www.linkedin.com/in/peter-kaliszky-3b941280/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-foreground transition-colors"

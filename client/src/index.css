@@ -34,11 +34,11 @@
   --muted-foreground: 0 0% 40%;
   --accent: 210 8% 94%;
   --accent-foreground: 0 0% 10%;
-  /* Soft Sage Green accent color */
-  --sage: 120 12% 61%;
-  --sage-foreground: 0 0% 100%;
-  --sage-muted: 120 12% 75%;
-  --sage-dark: 120 12% 50%;
+  /* Teal accent color */
+  --teal: 170 62% 50%;
+  --teal-foreground: 0 0% 10%;
+  --teal-muted: 170 50% 65%;
+  --teal-dark: 170 65% 40%;
   --destructive: 0 75% 42%;
   --destructive-foreground: 0 0% 98%;
   --input: 0 0% 75%;
@@ -123,11 +123,11 @@
   --muted-foreground: 0 0% 65%;
   --accent: 210 6% 16%;
   --accent-foreground: 0 0% 95%;
-  /* Soft Sage Green accent color */
-  --sage: 120 12% 61%;
-  --sage-foreground: 0 0% 100%;
-  --sage-muted: 120 12% 45%;
-  --sage-dark: 120 12% 70%;
+  /* Teal accent color */
+  --teal: 170 62% 50%;
+  --teal-foreground: 0 0% 98%;
+  --teal-muted: 170 45% 60%;
+  --teal-dark: 170 65% 55%;
   --destructive: 0 75% 45%;
   --destructive-foreground: 0 0% 98%;
   --input: 0 0% 30%;
@@ -465,18 +465,31 @@
     animation: gradient-shift 8s ease infinite;
   }
 
-  .gradient-text-sage {
+  .gradient-text-teal {
     background: linear-gradient(
       135deg,
       hsl(var(--foreground)) 0%,
-      hsl(var(--sage)) 50%,
       hsl(var(--foreground)) 100%
     );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
-    animation: gradient-shift 6s ease infinite;
+    transition: background 0.4s ease;
+  }
+
+  .gradient-text-teal:hover,
+  .hero-teal-hover:hover .gradient-text-teal {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--teal)) 50%,
+      hsl(var(--foreground)) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease infinite;
   }
 
   @keyframes gradient-shift {
@@ -537,8 +550,8 @@
     animation: float-orb 8s ease-in-out infinite;
   }
 
-  .floating-orb-sage {
-    background: radial-gradient(circle, hsl(var(--sage) / 0.4), transparent);
+  .floating-orb-teal {
+    background: radial-gradient(circle, hsl(var(--teal) / 0.4), transparent);
   }
 
   .floating-orb-neutral {
@@ -556,30 +569,30 @@
     }
   }
 
-  /* Sage green glow for AI section */
-  .ai-glow-sage {
+  /* Teal glow for AI section */
+  .ai-glow-teal {
     position: relative;
   }
   
-  .ai-glow-sage::before {
+  .ai-glow-teal::before {
     content: "";
     position: absolute;
     inset: -4px;
     background: linear-gradient(135deg, 
-      hsl(var(--sage) / 0.2), 
-      hsl(var(--sage-muted) / 0.3), 
+      hsl(var(--teal) / 0.2), 
+      hsl(var(--teal-muted) / 0.3), 
       rgba(255, 255, 255, 0.1),
-      hsl(var(--sage-muted) / 0.3),
-      hsl(var(--sage) / 0.2));
+      hsl(var(--teal-muted) / 0.3),
+      hsl(var(--teal) / 0.2));
     background-size: 300% 300%;
     border-radius: inherit;
     z-index: -1;
     filter: blur(30px);
     opacity: 0.7;
-    animation: ai-pulse-sage 6s ease-in-out infinite;
+    animation: ai-pulse-teal 6s ease-in-out infinite;
   }
 
-  @keyframes ai-pulse-sage {
+  @keyframes ai-pulse-teal {
     0%, 100% { 
       background-position: 0% 50%;
       opacity: 0.5;
@@ -592,37 +605,23 @@
     }
   }
 
-  /* Sage colored button */
-  .btn-sage {
-    background: hsl(var(--sage));
-    color: hsl(var(--sage-foreground));
-    border: 1px solid hsl(var(--sage-dark));
+  /* Teal badge */
+  .badge-teal {
+    background: hsl(var(--teal) / 0.15);
+    color: hsl(var(--teal-dark));
+    border: 1px solid hsl(var(--teal) / 0.3);
   }
 
-  .btn-sage:hover {
-    background: hsl(var(--sage-dark));
+  .dark .badge-teal {
+    background: hsl(var(--teal) / 0.2);
+    color: hsl(var(--teal));
+    border: 1px solid hsl(var(--teal) / 0.3);
   }
 
-  /* Sage badge */
-  .badge-sage {
-    background: hsl(var(--sage) / 0.15);
-    color: hsl(var(--sage-dark));
-    border: 1px solid hsl(var(--sage) / 0.3);
-  }
-
-  .dark .badge-sage {
-    background: hsl(var(--sage) / 0.2);
-    color: hsl(var(--sage));
-    border: 1px solid hsl(var(--sage) / 0.3);
-  }
-
-  /* Sage accent dot */
-  .sage-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: hsl(var(--sage));
-    box-shadow: 0 0 10px hsl(var(--sage) / 0.5);
+  /* Teal accent dot */
+  .teal-dot {
+    background: hsl(var(--teal));
+    box-shadow: 0 0 10px hsl(var(--teal) / 0.5);
   }
 }
 

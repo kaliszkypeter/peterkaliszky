@@ -51,9 +51,9 @@ export function AISection() {
         style={{ y: backgroundY }}
       />
       
-      {/* Floating orbs with sage accent */}
+      {/* Floating orbs with teal accent */}
       <motion.div 
-        className="absolute top-20 right-20 w-64 h-64 floating-orb floating-orb-sage"
+        className="absolute top-20 right-20 w-64 h-64 floating-orb floating-orb-teal"
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -61,7 +61,7 @@ export function AISection() {
         transition={{ duration: 8, repeat: Infinity }}
       />
       <motion.div 
-        className="absolute bottom-40 left-20 w-48 h-48 floating-orb floating-orb-sage"
+        className="absolute bottom-40 left-20 w-48 h-48 floating-orb floating-orb-teal"
         animate={{ 
           scale: [1, 1.15, 1],
           opacity: [0.2, 0.4, 0.2],
@@ -86,13 +86,13 @@ export function AISection() {
             <Sparkles className="h-4 w-4 text-muted-foreground" />
             <Badge 
               variant="secondary" 
-              className="badge-sage"
+              className="badge-teal"
             >
               AI Leadership
             </Badge>
           </motion.div>
           
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 glow-text gradient-text-sage">
+          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 glow-text gradient-text">
             AI Corner
           </h2>
           
@@ -116,7 +116,7 @@ export function AISection() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-16"
         >
-          <div className="ai-glow-sage glass-card p-8 md:p-12 rounded-3xl glow-border animated-border">
+          <div className="ai-glow-teal glass-card p-8 md:p-12 rounded-3xl glow-border animated-border">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
                 <motion.div 
@@ -214,7 +214,7 @@ export function AISection() {
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button 
               size="lg"
-              className="group btn-sage px-8"
+              className="group bg-foreground text-background hover:bg-foreground/90 px-8"
               data-testid="button-discuss-ai"
             >
               <TrendingUp className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />

@@ -139,7 +139,7 @@ export function ExperienceSection() {
                 className="relative pl-8 border-l border-foreground/10"
               >
                 <motion.div 
-                  className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full sage-dot border-2 border-background"
+                  className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full teal-dot border-2 border-background"
                   whileHover={{ scale: 1.5 }}
                 />
                 

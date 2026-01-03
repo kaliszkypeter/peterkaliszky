@@ -19,7 +19,7 @@ export function Contact() {
       
       {/* Background elements - floating orbs */}
       <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] floating-orb floating-orb-sage"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] floating-orb floating-orb-teal"
         animate={{ 
           scale: [1, 1.1, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -66,7 +66,7 @@ export function Contact() {
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button 
               size="lg" 
-              className="group btn-sage px-8"
+              className="group bg-foreground text-background hover:bg-foreground/90 px-8"
               data-testid="button-email-contact"
             >
               <Mail className="mr-2 h-4 w-4" />

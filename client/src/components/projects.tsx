@@ -175,7 +175,7 @@ export function Projects() {
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className={`text-xs ${techIndex === 0 ? 'badge-sage' : 'bg-foreground/5 border-foreground/10'}`}
+                          className={`text-xs ${techIndex === 0 ? 'badge-teal' : 'bg-foreground/5 border-foreground/10'}`}
                         >
                           {tech}
                         </Badge>

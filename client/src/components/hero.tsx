@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type MouseEvent } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function MouseFollowText({ children, className }: { children: string; className?: string }) {
@@ -195,17 +195,10 @@ export function Hero() {
           <Button
             size="lg"
             onClick={scrollToProjects}
-            className="group bg-foreground text-background hover:bg-foreground/90 px-8"
+            className="bg-foreground text-background hover:bg-foreground/90 px-8"
             data-testid="button-view-work"
           >
-            <span className="relative">
-              View My Work
-              <motion.span
-                className="absolute -right-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
-              >
-                <Sparkles className="h-3 w-3" />
-              </motion.span>
-            </span>
+            My Projects
           </Button>
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button

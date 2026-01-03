@@ -3,9 +3,9 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ExternalLink, Sparkles, ShoppingCart, MessageSquare, Bot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import promptCrafterImg from "@assets/generated_images/prompt_crafter_ai_tool_interface.png";
-import cozyCaryPandaImg from "@assets/generated_images/e-commerce_shopping_cart_app.png";
-import cyberChatImg from "@assets/generated_images/cyber_chat_messaging_app.png";
+import promptCrafterImg from "@assets/Screenshot_2026-01-03_at_23.14.50_1767478493952.png";
+import cozyCaryPandaImg from "@assets/Screenshot_2026-01-03_at_23.15.34_1767478537367.png";
+import cyberChatImg from "@assets/Screenshot_2026-01-03_at_23.23.17_1767479017881.png";
 
 function TiltCard({ children, className }: { children: ReactNode; className?: string }) {
   const [rotateX, setRotateX] = useState(0);

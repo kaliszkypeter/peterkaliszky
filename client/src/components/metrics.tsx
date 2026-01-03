@@ -22,7 +22,7 @@ const metrics: Metric[] = [
     description: "Adopted secure authentication",
   },
   {
-    value: 6,
+    value: 8,
     suffix: "+",
     label: "Years Experience",
     description: "In product ownership",

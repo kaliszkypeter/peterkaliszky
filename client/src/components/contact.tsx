@@ -1,14 +1,24 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Mail, Phone, MapPin, Linkedin, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Contact() {
   const ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  // Parallax for background orbs
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const orb1Y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const orb2Y = useTransform(scrollYProgress, [0, 1], [50, -80]);
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-6 relative overflow-hidden">
+    <section id="contact" ref={sectionRef} className="py-24 sm:py-32 px-6 relative overflow-hidden">
       {/* Top decorative line */}
       <motion.div 
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
@@ -17,9 +27,10 @@ export function Contact() {
         transition={{ duration: 1 }}
       />
       
-      {/* Background elements - floating orbs */}
+      {/* Background elements - floating orbs with parallax */}
       <motion.div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] floating-orb floating-orb-teal"
+        style={{ y: orb1Y }}
         animate={{ 
           scale: [1, 1.1, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -28,6 +39,7 @@ export function Contact() {
       />
       <motion.div 
         className="absolute top-1/4 right-1/4 w-[300px] h-[300px] floating-orb floating-orb-neutral"
+        style={{ y: orb2Y }}
         animate={{ 
           scale: [1, 1.15, 1],
           opacity: [0.2, 0.35, 0.2],

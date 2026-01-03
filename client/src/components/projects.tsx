@@ -1,5 +1,5 @@
 import { useRef, useState, type ReactNode, type MouseEvent } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ExternalLink, Sparkles, ShoppingCart, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -82,10 +82,25 @@ const projects: Project[] = [
 
 export function Projects() {
   const ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  // Parallax for decorative elements
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const decorY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <section id="projects" className="py-24 sm:py-32 px-6 relative overflow-hidden">
+    <section id="projects" ref={sectionRef} className="py-24 sm:py-32 px-6 relative overflow-hidden">
+      {/* Parallax background decoration */}
+      <motion.div 
+        className="absolute -right-20 top-1/4 w-96 h-96 floating-orb floating-orb-neutral opacity-30"
+        style={{ y: decorY }}
+      />
+      
       <motion.div 
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
         initial={{ scaleX: 0 }}

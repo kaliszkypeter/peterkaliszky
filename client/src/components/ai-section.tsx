@@ -38,6 +38,8 @@ export function AISection() {
   });
   
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const orb1Y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const orb2Y = useTransform(scrollYProgress, [0, 1], [60, -100]);
 
   return (
     <section 
@@ -45,15 +47,16 @@ export function AISection() {
       className="py-32 px-6 relative overflow-hidden"
       ref={ref}
     >
-      {/* Animated background */}
+      {/* Animated background with parallax */}
       <motion.div 
         className="absolute inset-0 gradient-mesh" 
         style={{ y: backgroundY }}
       />
       
-      {/* Floating orbs with teal accent */}
+      {/* Floating orbs with teal accent and parallax */}
       <motion.div 
         className="absolute top-20 right-20 w-64 h-64 floating-orb floating-orb-teal"
+        style={{ y: orb1Y }}
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -62,6 +65,7 @@ export function AISection() {
       />
       <motion.div 
         className="absolute bottom-40 left-20 w-48 h-48 floating-orb floating-orb-teal"
+        style={{ y: orb2Y }}
         animate={{ 
           scale: [1, 1.15, 1],
           opacity: [0.2, 0.4, 0.2],

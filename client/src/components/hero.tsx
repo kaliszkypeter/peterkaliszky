@@ -19,6 +19,13 @@ export function Hero() {
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
   const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
   const y = useTransform(scrollY, [0, 400], [0, 50]);
+  
+  // Parallax transforms for background elements
+  const bgY = useTransform(scrollY, [0, 500], [0, 150]);
+  const orb1Y = useTransform(scrollY, [0, 500], [0, 80]);
+  const orb2Y = useTransform(scrollY, [0, 500], [0, 120]);
+  const orb3Y = useTransform(scrollY, [0, 500], [0, 60]);
+  const dotGridY = useTransform(scrollY, [0, 500], [0, 40]);
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
@@ -52,32 +59,41 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden dot-grid hero-teal-hover">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 gradient-mesh" />
+    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden hero-teal-hover">
+      {/* Parallax dot grid background */}
+      <motion.div 
+        className="absolute inset-0 dot-grid"
+        style={{ y: dotGridY }}
+      />
       
-      {/* Floating orbs with teal accent */}
+      {/* Parallax gradient mesh background */}
+      <motion.div 
+        className="absolute inset-0 gradient-mesh" 
+        style={{ y: bgY }}
+      />
+      
+      {/* Floating orbs with teal accent and parallax */}
       <motion.div 
         className="absolute top-1/4 left-1/4 w-96 h-96 floating-orb floating-orb-teal"
+        style={{ y: orb1Y }}
         animate={{ 
           x: [0, 50, 0],
-          y: [0, 30, 0],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div 
         className="absolute bottom-1/4 right-1/4 w-80 h-80 floating-orb floating-orb-neutral"
+        style={{ y: orb2Y }}
         animate={{ 
           x: [0, -40, 0],
-          y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
       <motion.div 
         className="absolute top-1/3 right-1/3 w-64 h-64 floating-orb floating-orb-teal"
+        style={{ y: orb3Y }}
         animate={{ 
           x: [0, -30, 0],
-          y: [0, 40, 0],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 2 }}
       />

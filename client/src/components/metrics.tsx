@@ -64,7 +64,7 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
   }, [isInView, value]);
 
   return (
-    <span ref={ref} className="font-serif text-4xl sm:text-5xl font-bold">
+    <span ref={ref} className="font-serif text-4xl sm:text-5xl font-bold text-sage">
       {displayValue}
       {suffix}
     </span>
@@ -86,7 +86,8 @@ export function Metrics() {
     <section id="work" className="py-24 sm:py-32 px-6 relative overflow-hidden">
       {/* Decorative elements */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.3), transparent)" }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
@@ -104,7 +105,8 @@ export function Metrics() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
+            className="w-16 h-px mx-auto mb-6"
+            style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
           />
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
             Impact & Results
@@ -122,7 +124,7 @@ export function Metrics() {
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="text-center p-6 sm:p-8 rounded-2xl glass-card glow-border group"
+              className="text-center p-6 sm:p-8 rounded-2xl glass-card group border border-transparent hover:border-sage/20 transition-colors"
             >
               <motion.div
                 initial={{ scale: 0.8 }}
@@ -131,7 +133,7 @@ export function Metrics() {
               >
                 <AnimatedNumber value={metric.value} suffix={metric.suffix} />
               </motion.div>
-              <h3 className="font-medium mt-3 mb-1 group-hover:text-foreground transition-colors">
+              <h3 className="font-medium mt-3 mb-1 group-hover:text-sage transition-colors">
                 {metric.label}
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -144,7 +146,8 @@ export function Metrics() {
       
       {/* Bottom decorative line */}
       <motion.div 
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.2), transparent)" }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1, delay: 0.5 }}

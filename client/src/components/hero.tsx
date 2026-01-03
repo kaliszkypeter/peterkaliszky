@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { MapPin, Mail, ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -14,11 +14,31 @@ export function Hero() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
   const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
   const y = useTransform(scrollY, [0, 400], [0, 50]);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        mouseX.set((e.clientX - centerX) / 50);
+        mouseY.set((e.clientY - centerY) / 50);
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
@@ -52,16 +72,26 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden">
+    <section 
+      ref={containerRef}
+      className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden"
+    >
+      {/* Particle grid background */}
+      <div className="absolute inset-0 particle-grid opacity-50" />
+      
       {/* Animated background elements */}
       <div className="absolute inset-0 gradient-mesh" />
       <motion.div 
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-foreground/[0.02] blur-3xl"
-        animate={{ 
-          x: [0, 50, 0],
-          y: [0, 30, 0],
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
+        style={{ 
+          x: springX,
+          y: springY,
+          background: "radial-gradient(circle, hsl(var(--sage) / 0.08) 0%, transparent 70%)"
         }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        animate={{ 
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
         className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-foreground/[0.02] blur-3xl"
@@ -76,12 +106,13 @@ export function Hero() {
         style={{ opacity, scale, y }}
         className="max-w-4xl mx-auto text-center relative z-10"
       >
-        {/* Decorative line */}
+        {/* Decorative line with sage accent */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.1 }}
-          className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-8"
+          className="w-16 h-px mx-auto mb-8"
+          style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
         />
 
         <motion.div
@@ -103,7 +134,7 @@ export function Hero() {
           <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-muted-foreground">
             {displayText}
             <motion.span 
-              className="text-foreground/40"
+              className="text-sage"
               animate={{ opacity: [1, 0, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             >
@@ -130,13 +161,13 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            <MapPin className="h-4 w-4" />
+            <MapPin className="h-4 w-4 text-sage" />
             <span>Budapest, Hungary</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/50" />
+          <div className="hidden sm:block w-1 h-1 rounded-full bg-sage/50" />
           <a
             href="mailto:kaliszky.peter@gmail.com"
-            className="flex items-center gap-2 text-muted-foreground text-sm hover:text-foreground transition-colors duration-300"
+            className="flex items-center gap-2 text-muted-foreground text-sm hover:text-sage transition-colors duration-300"
             data-testid="link-email"
           >
             <Mail className="h-4 w-4" />
@@ -153,13 +184,13 @@ export function Hero() {
           <Button
             size="lg"
             onClick={scrollToProjects}
-            className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
+            className="group btn-sage px-8"
             data-testid="button-view-work"
           >
-            <span className="relative">
+            <span className="relative flex items-center gap-2">
               View My Work
               <motion.span
-                className="absolute -right-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+                className="opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <Sparkles className="h-3 w-3" />
               </motion.span>
@@ -182,7 +213,8 @@ export function Hero() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mt-12"
+          className="w-16 h-px mx-auto mt-12"
+          style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
         />
       </motion.div>
 
@@ -198,7 +230,7 @@ export function Hero() {
           className="flex flex-col items-center gap-2"
         >
           <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">Scroll</span>
-          <ArrowDown className="h-4 w-4 text-muted-foreground/60" />
+          <ArrowDown className="h-4 w-4 text-sage/60" />
         </motion.div>
       </motion.div>
     </section>

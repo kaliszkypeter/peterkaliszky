@@ -61,7 +61,8 @@ export function Skills() {
     <section id="skills" className="py-24 sm:py-32 px-6 relative">
       {/* Top decorative line */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.3), transparent)" }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
@@ -79,7 +80,8 @@ export function Skills() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
+            className="w-16 h-px mx-auto mb-6"
+            style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
           />
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
             Skills & Tools
@@ -97,9 +99,9 @@ export function Skills() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="glass-card p-6 glow-border group"
+              className="glass-card p-6 group border border-transparent hover:border-sage/20 transition-colors"
             >
-              <h3 className="font-semibold mb-4 group-hover:text-foreground transition-colors">
+              <h3 className="font-semibold mb-4 group-hover:text-sage transition-colors">
                 {category.name}
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -112,7 +114,7 @@ export function Skills() {
                   >
                     <Badge
                       variant="secondary"
-                      className="text-xs bg-foreground/5 border-foreground/10 hover:bg-foreground/10 transition-colors"
+                      className="text-xs bg-foreground/5 border-foreground/10 hover:bg-sage/10 hover:border-sage/20 transition-colors"
                     >
                       {skill}
                     </Badge>
@@ -128,11 +130,11 @@ export function Skills() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="glass-card p-8 glow-border"
+          className="glass-card p-8 border border-transparent hover:border-sage/20 transition-colors"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-lg bg-foreground/5 border border-foreground/10">
-              <BookOpen className="h-5 w-5 text-foreground/70" />
+            <div className="p-2 rounded-lg bg-sage/10 border border-sage/20">
+              <BookOpen className="h-5 w-5 text-sage" />
             </div>
             <h3 className="font-semibold">
               Professional Development & Learning
@@ -148,7 +150,7 @@ export function Skills() {
               >
                 <Badge 
                   variant="outline" 
-                  className="text-xs border-foreground/10 hover:border-foreground/20 transition-colors"
+                  className="text-xs border-sage/20 hover:border-sage/40 hover:bg-sage/5 transition-colors"
                 >
                   {resource}
                 </Badge>

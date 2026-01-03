@@ -52,6 +52,11 @@ export default {
           border: "var(--destructive-border)",
         },
         ring: "hsl(var(--ring) / <alpha-value>)",
+        sage: {
+          DEFAULT: "hsl(var(--sage) / <alpha-value>)",
+          foreground: "hsl(var(--sage-foreground) / <alpha-value>)",
+          muted: "hsl(var(--sage-muted) / <alpha-value>)",
+        },
         chart: {
           "1": "hsl(var(--chart-1) / <alpha-value>)",
           "2": "hsl(var(--chart-2) / <alpha-value>)",

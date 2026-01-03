@@ -11,7 +11,8 @@ export function Contact() {
     <section id="contact" className="py-24 sm:py-32 px-6 relative overflow-hidden">
       {/* Top decorative line */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.3), transparent)" }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
@@ -19,7 +20,8 @@ export function Contact() {
       
       {/* Background elements */}
       <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-foreground/[0.02] blur-3xl"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl"
+        style={{ background: "radial-gradient(circle, hsl(var(--sage) / 0.05) 0%, transparent 70%)" }}
         animate={{ 
           scale: [1, 1.1, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -38,7 +40,8 @@ export function Contact() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
+            className="w-16 h-px mx-auto mb-6"
+            style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
           />
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
             Let's Connect
@@ -58,7 +61,7 @@ export function Contact() {
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button 
               size="lg" 
-              className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
+              className="group btn-sage px-8"
               data-testid="button-email-contact"
             >
               <Mail className="mr-2 h-4 w-4" />
@@ -70,7 +73,7 @@ export function Contact() {
             <Button 
               variant="outline" 
               size="lg" 
-              className="px-8"
+              className="px-8 border-sage/30 hover:border-sage/50"
               data-testid="button-phone-contact"
             >
               <Phone className="mr-2 h-4 w-4" />
@@ -89,16 +92,16 @@ export function Contact() {
             href="https://linkedin.com/in/peterkaliszky"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-foreground transition-colors"
+            className="flex items-center gap-2 hover:text-sage transition-colors"
             data-testid="link-linkedin"
             whileHover={{ y: -2 }}
           >
             <Linkedin className="h-5 w-5" />
             <span className="text-sm">LinkedIn</span>
           </motion.a>
-          <div className="w-px h-4 bg-foreground/10" />
+          <div className="w-px h-4 bg-sage/20" />
           <div className="flex items-center gap-2">
-            <MapPin className="h-4 w-4" />
+            <MapPin className="h-4 w-4 text-sage" />
             <span className="text-sm">Budapest, Hungary</span>
           </div>
         </motion.div>
@@ -108,7 +111,8 @@ export function Contact() {
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="w-24 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mx-auto mt-16"
+          className="w-24 h-px mx-auto mt-16"
+          style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.3), transparent)" }}
         />
       </div>
     </section>

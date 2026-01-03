@@ -43,6 +43,9 @@
   --chart-3: 15 75% 50%;
   --chart-4: 165 70% 42%;
   --chart-5: 45 85% 48%;
+  --sage: 120 12% 58%;
+  --sage-foreground: 0 0% 98%;
+  --sage-muted: 120 10% 75%;
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -123,6 +126,9 @@
   --input: 0 0% 30%;
   --ring: 210 85% 50%;
   --chart-1: 210 85% 65%;
+  --sage: 120 12% 62%;
+  --sage-foreground: 0 0% 98%;
+  --sage-muted: 120 10% 45%;
   --chart-2: 280 65% 70%;
   --chart-3: 15 75% 68%;
   --chart-4: 165 70% 65%;
@@ -361,6 +367,84 @@
     width: 40px;
     height: 2px;
     background: linear-gradient(90deg, currentColor, transparent);
+  }
+
+  /* Animated gradient border */
+  .animated-border {
+    position: relative;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+                linear-gradient(var(--border-angle, 0deg), 
+                  hsl(var(--sage) / 0.3),
+                  hsl(var(--foreground) / 0.1),
+                  hsl(var(--sage) / 0.3),
+                  hsl(var(--foreground) / 0.1)) border-box;
+    border: 1px solid transparent;
+    animation: rotate-border 8s linear infinite;
+  }
+
+  @keyframes rotate-border {
+    0% { --border-angle: 0deg; }
+    100% { --border-angle: 360deg; }
+  }
+
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  /* Sage accent glow */
+  .sage-glow {
+    box-shadow: 0 0 40px hsl(var(--sage) / 0.1);
+  }
+
+  .dark .sage-glow {
+    box-shadow: 0 0 60px hsl(var(--sage) / 0.15);
+  }
+
+  /* Particle grid background */
+  .particle-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.05) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  .dark .particle-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.08) 1px, transparent 0);
+  }
+
+  /* 3D card tilt perspective container */
+  .tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  /* Sage accent button */
+  .btn-sage {
+    background-color: hsl(var(--sage));
+    color: hsl(var(--sage-foreground));
+    border: 1px solid hsl(var(--sage) / 0.8);
+  }
+
+  .btn-sage:hover {
+    background-color: hsl(var(--sage) / 0.9);
+  }
+
+  /* Sage text */
+  .text-sage {
+    color: hsl(var(--sage));
+  }
+
+  /* Sage badge */
+  .badge-sage {
+    background-color: hsl(var(--sage) / 0.15);
+    color: hsl(var(--sage));
+    border: 1px solid hsl(var(--sage) / 0.2);
+  }
+
+  .dark .badge-sage {
+    background-color: hsl(var(--sage) / 0.2);
+    color: hsl(var(--sage));
+    border: 1px solid hsl(var(--sage) / 0.3);
   }
 }
 

@@ -46,7 +46,8 @@ export function BlogPreview() {
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="w-12 h-px bg-gradient-to-r from-foreground/30 to-transparent mb-4"
+              className="w-12 h-px mb-4"
+              style={{ background: "linear-gradient(90deg, hsl(var(--sage) / 0.5), transparent)" }}
             />
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-2 glow-text">
               From the Blog
@@ -63,11 +64,11 @@ export function BlogPreview() {
             <Link href="/blog">
               <Button 
                 variant="outline" 
-                className="group"
+                className="group border-sage/30 hover:border-sage/50"
                 data-testid="link-view-all-posts"
               >
                 View All Posts
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:text-sage transition-all" />
               </Button>
             </Link>
           </motion.div>
@@ -102,17 +103,14 @@ export function BlogPreview() {
                     className="h-full"
                   >
                     <Card
-                      className="h-full glass-card glow-border cursor-pointer group"
+                      className="h-full glass-card cursor-pointer group border border-transparent hover:border-sage/20 transition-colors"
                       data-testid={`card-blog-${post.slug}`}
                     >
                       <CardContent className="p-6">
-                        <Badge 
-                          variant="secondary" 
-                          className="mb-4 text-xs bg-foreground/5 border-foreground/10"
-                        >
+                        <Badge className="mb-4 text-xs badge-sage">
                           {post.category}
                         </Badge>
-                        <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-foreground transition-colors">
+                        <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-sage transition-colors">
                           {post.title}
                           <ArrowUpRight className="inline-block ml-1 h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </h3>
@@ -121,11 +119,11 @@ export function BlogPreview() {
                         </p>
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
+                            <Calendar className="h-3 w-3 text-sage/60" />
                             {post.publishedAt}
                           </div>
                           <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
+                            <Clock className="h-3 w-3 text-sage/60" />
                             {post.readingTime} min read
                           </div>
                         </div>

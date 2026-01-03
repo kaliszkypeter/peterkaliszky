@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ExternalLink, Sparkles, ShoppingCart, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -43,14 +43,62 @@ const projects: Project[] = [
   },
 ];
 
+function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((e.clientX - centerX) / rect.width);
+    y.set((e.clientY - centerY) / rect.height);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      style={{
+        rotateX: isHovered ? rotateX : 0,
+        rotateY: isHovered ? rotateY : 0,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export function Projects() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="projects" className="py-24 sm:py-32 px-6 relative overflow-hidden">
+      {/* Particle grid background */}
+      <div className="absolute inset-0 particle-grid opacity-30" />
+      
       <motion.div 
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.3), transparent)" }}
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
@@ -68,7 +116,8 @@ export function Projects() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
+            className="w-16 h-px mx-auto mb-6"
+            style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
           />
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
             Projects
@@ -84,67 +133,76 @@ export function Projects() {
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="glass-card rounded-2xl glow-border group flex flex-col h-full overflow-hidden"
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
             >
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block relative overflow-hidden"
-                data-testid={`link-project-image-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                <div className="aspect-video overflow-hidden">
-                  <motion.img
-                    src={project.image}
-                    alt={`${project.title} preview`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <project.icon className="h-4 w-4 text-foreground/50" />
-                    <h3 className="font-semibold text-lg group-hover:text-foreground transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
+              <TiltCard className="h-full">
+                <div className="glass-card rounded-2xl animated-border sage-glow group flex flex-col h-full overflow-hidden">
                   <a
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-testid={`link-project-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="block relative overflow-hidden"
+                    data-testid={`link-project-image-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    <Button 
-                      size="icon" 
-                      variant="ghost"
-                      className="opacity-60 group-hover:opacity-100 transition-opacity h-8 w-8"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
+                    <div className="aspect-video overflow-hidden">
+                      <motion.img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                      <span className="text-sm text-sage font-medium flex items-center gap-1">
+                        Visit Site <ExternalLink className="h-3 w-3" />
+                      </span>
+                    </div>
                   </a>
+                  
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <project.icon className="h-4 w-4 text-sage" />
+                        <h3 className="font-semibold text-lg group-hover:text-sage transition-colors">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-testid={`link-project-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      >
+                        <Button 
+                          size="icon" 
+                          variant="ghost"
+                          className="opacity-60 group-hover:opacity-100 group-hover:text-sage transition-all h-8 w-8"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      </a>
+                    </div>
+                    
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">
+                      {project.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-sage/10">
+                      {project.techStack.map((tech, techIndex) => (
+                        <motion.div
+                          key={tech}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                          transition={{ duration: 0.3, delay: 0.5 + index * 0.1 + techIndex * 0.05 }}
+                        >
+                          <Badge className="text-xs badge-sage">
+                            {tech}
+                          </Badge>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-foreground/5">
-                  {project.techStack.map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="secondary"
-                      className="text-xs bg-foreground/5 border-foreground/10"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

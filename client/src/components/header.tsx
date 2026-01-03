@@ -46,7 +46,7 @@ export function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`max-w-3xl mx-auto px-4 py-2.5 rounded-full transition-all duration-500 ${
+        className={`max-w-3xl mx-auto px-4 py-2.5 rounded-xl transition-all duration-500 ${
           isScrolled
             ? "bg-background/60 dark:bg-background/40 backdrop-blur-xl border border-foreground/[0.08] shadow-lg shadow-black/[0.03] dark:shadow-black/[0.1]"
             : "bg-background/30 dark:bg-background/20 backdrop-blur-md border border-transparent"

@@ -14,23 +14,6 @@ const skillCategories: SkillCategory[] = [
     skills: ["Metabase", "Mixpanel", "Clarity", "Google Analytics", "Firebase"],
   },
   {
-    name: "Technical Stack",
-    skills: [
-      "React Native",
-      "iOS & Android (Kotlin)",
-      "Angular",
-      "React",
-      ".NET",
-      "Node.js",
-      "Next.js",
-      "TypeScript",
-    ],
-  },
-  {
-    name: "Architecture",
-    skills: ["Monolith", "Microservices", "API Design", "Postman"],
-  },
-  {
     name: "AI & Productivity",
     skills: ["Lovable", "Perplexity", "Claude", "ChatGPT"],
   },

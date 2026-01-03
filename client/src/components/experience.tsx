@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ExternalLink, Briefcase, GraduationCap, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Experience } from "@shared/schema";
@@ -78,21 +78,9 @@ const education = [
 export function ExperienceSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
-    <section id="experience" className="py-24 sm:py-32 px-6 relative overflow-hidden">
-      <motion.div 
-        className="absolute inset-0 gradient-mesh"
-        style={{ y: backgroundY }}
-      />
-      
+    <section id="experience" className="py-24 sm:py-32 px-6 relative">
       <div className="max-w-6xl mx-auto relative">
         <motion.div
           ref={ref}

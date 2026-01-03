@@ -14,7 +14,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     name: "AI & Productivity",
-    skills: ["Lovable", "Perplexity", "Claude", "ChatGPT"],
+    skills: ["Lovable", "Perplexity", "Claude", "ChatGPT", "Gemini", "NotebookLM", "n8n", "Replit"],
   },
   {
     name: "Languages",

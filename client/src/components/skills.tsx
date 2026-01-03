@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen } from "lucide-react";
 import type { SkillCategory } from "@shared/schema";
 
 const skillCategories: SkillCategory[] = [
@@ -26,14 +25,6 @@ const skillCategories: SkillCategory[] = [
       "Italian (Beginner)",
     ],
   },
-];
-
-const learningResources = [
-  "The Product Compass (Paweł Huryn)",
-  "Lenny's Newsletter and Podcast",
-  "Product Growth (Aakash Gupta)",
-  "Product Space Newsletter",
-  "JustAnotherPM",
 ];
 
 export function Skills() {
@@ -105,40 +96,6 @@ export function Skills() {
             </motion.div>
           ))}
         </div>
-
-        {/* Learning Resources */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="glass-card p-8 glow-border"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-lg bg-foreground/5 border border-foreground/10">
-              <BookOpen className="h-5 w-5 text-foreground/70" />
-            </div>
-            <h3 className="font-semibold">
-              Professional Development & Learning
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {learningResources.map((resource, index) => (
-              <motion.div
-                key={resource}
-                initial={{ opacity: 0, x: -10 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.3, delay: 0.8 + index * 0.05 }}
-              >
-                <Badge 
-                  variant="outline" 
-                  className="text-xs border-foreground/10 hover:border-foreground/20 transition-colors"
-                >
-                  {resource}
-                </Badge>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

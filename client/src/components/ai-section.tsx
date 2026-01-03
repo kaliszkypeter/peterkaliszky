@@ -51,10 +51,9 @@ export function AISection() {
         style={{ y: backgroundY }}
       />
       
-      {/* Sage glow orb */}
+      {/* Floating elements */}
       <motion.div 
-        className="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl"
-        style={{ background: "radial-gradient(circle, hsl(var(--sage) / 0.1) 0%, transparent 70%)" }}
+        className="absolute top-20 right-20 w-64 h-64 rounded-full bg-foreground/[0.02] blur-3xl"
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -76,8 +75,11 @@ export function AISection() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Sparkles className="h-4 w-4 text-sage" />
-            <Badge className="badge-sage">
+            <Sparkles className="h-4 w-4 text-muted-foreground" />
+            <Badge 
+              variant="secondary" 
+              className="bg-foreground/5 border-foreground/10 text-muted-foreground"
+            >
               AI Leadership
             </Badge>
           </motion.div>
@@ -90,8 +92,7 @@ export function AISection() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-24 h-px mx-auto mb-6"
-            style={{ background: "linear-gradient(90deg, transparent, hsl(var(--sage) / 0.5), transparent)" }}
+            className="w-24 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
           />
           
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -100,14 +101,14 @@ export function AISection() {
           </p>
         </motion.div>
 
-        {/* Main AI Card with Animated Border */}
+        {/* Main AI Card with Glow */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-16"
         >
-          <div className="glass-card animated-border sage-glow p-8 md:p-12 rounded-3xl">
+          <div className="ai-glow glass-card p-8 md:p-12 rounded-3xl glow-border">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
                 <motion.div 
@@ -116,8 +117,8 @@ export function AISection() {
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                  <div className="p-3 rounded-xl bg-sage/10 border border-sage/20">
-                    <Zap className="h-6 w-6 text-sage" />
+                  <div className="p-3 rounded-xl bg-foreground/5 border border-foreground/10">
+                    <Zap className="h-6 w-6 text-foreground/70" />
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">
                     The Future of Product Management
@@ -155,15 +156,15 @@ export function AISection() {
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                     whileHover={{ x: 5 }}
-                    className="glass-panel rounded-xl p-5 flex items-center gap-4 group cursor-default border border-sage/10 hover:border-sage/30 transition-colors"
+                    className="glass-panel rounded-xl p-5 flex items-center gap-4 group cursor-default"
                   >
-                    <div className="text-3xl font-bold font-serif text-sage">
+                    <div className="text-3xl font-bold font-serif">
                       {metric.value}
                     </div>
                     <div className="text-muted-foreground">
                       {metric.label}
                     </div>
-                    <ArrowUpRight className="h-4 w-4 ml-auto text-sage/0 group-hover:text-sage/50 transition-all" />
+                    <ArrowUpRight className="h-4 w-4 ml-auto text-muted-foreground/0 group-hover:text-muted-foreground/50 transition-all" />
                   </motion.div>
                 ))}
               </div>
@@ -180,16 +181,16 @@ export function AISection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="glass-card p-6 rounded-2xl group border border-transparent hover:border-sage/20 transition-colors"
+              className="glass-card p-6 rounded-2xl group glow-border"
             >
               <motion.div 
-                className="p-3 rounded-xl bg-sage/10 border border-sage/20 w-fit mb-4 group-hover:bg-sage/20 transition-colors duration-300"
+                className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 w-fit mb-4 group-hover:bg-foreground/10 transition-colors duration-300"
                 whileHover={{ rotate: [0, -5, 5, 0] }}
                 transition={{ duration: 0.5 }}
               >
-                <item.icon className="h-6 w-6 text-sage" />
+                <item.icon className="h-6 w-6 text-foreground/70" />
               </motion.div>
-              <h3 className="font-semibold text-lg mb-2 group-hover:text-sage transition-colors">{item.title}</h3>
+              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
@@ -205,7 +206,7 @@ export function AISection() {
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button 
               size="lg"
-              className="group btn-sage px-8"
+              className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
               data-testid="button-discuss-ai"
             >
               <TrendingUp className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />

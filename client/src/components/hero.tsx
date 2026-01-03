@@ -44,8 +44,8 @@ export function Hero() {
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentRoleIndex]);
 
-  const scrollToWork = () => {
-    const element = document.getElementById("work");
+  const scrollToProjects = () => {
+    const element = document.getElementById("projects");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -152,7 +152,7 @@ export function Hero() {
         >
           <Button
             size="lg"
-            onClick={scrollToWork}
+            onClick={scrollToProjects}
             className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
             data-testid="button-view-work"
           >

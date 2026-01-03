@@ -52,11 +52,13 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden dot-grid">
       {/* Animated background elements */}
       <div className="absolute inset-0 gradient-mesh" />
+      
+      {/* Floating orbs with sage accent */}
       <motion.div 
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-foreground/[0.02] blur-3xl"
+        className="absolute top-1/4 left-1/4 w-96 h-96 floating-orb floating-orb-sage"
         animate={{ 
           x: [0, 50, 0],
           y: [0, 30, 0],
@@ -64,12 +66,20 @@ export function Hero() {
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-foreground/[0.02] blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 floating-orb floating-orb-neutral"
         animate={{ 
           x: [0, -40, 0],
           y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div 
+        className="absolute top-1/3 right-1/3 w-64 h-64 floating-orb floating-orb-sage"
+        animate={{ 
+          x: [0, -30, 0],
+          y: [0, 40, 0],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 2 }}
       />
       
       <motion.div 
@@ -89,7 +99,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 glow-text">
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 glow-text gradient-text-sage">
             Peter Kaliszky
           </h1>
         </motion.div>
@@ -153,7 +163,7 @@ export function Hero() {
           <Button
             size="lg"
             onClick={scrollToProjects}
-            className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
+            className="group btn-sage px-8"
             data-testid="button-view-work"
           >
             <span className="relative">

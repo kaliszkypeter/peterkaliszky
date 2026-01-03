@@ -107,7 +107,7 @@ export function ExperienceSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
           />
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text gradient-text">
             Experience & Education
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -139,7 +139,7 @@ export function ExperienceSection() {
                 className="relative pl-8 border-l border-foreground/10"
               >
                 <motion.div 
-                  className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-foreground/30 border-2 border-background"
+                  className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full sage-dot border-2 border-background"
                   whileHover={{ scale: 1.5 }}
                 />
                 

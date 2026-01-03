@@ -17,14 +17,22 @@ export function Contact() {
         transition={{ duration: 1 }}
       />
       
-      {/* Background elements */}
+      {/* Background elements - floating orbs */}
       <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-foreground/[0.02] blur-3xl"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] floating-orb floating-orb-sage"
         animate={{ 
           scale: [1, 1.1, 1],
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 10, repeat: Infinity }}
+      />
+      <motion.div 
+        className="absolute top-1/4 right-1/4 w-[300px] h-[300px] floating-orb floating-orb-neutral"
+        animate={{ 
+          scale: [1, 1.15, 1],
+          opacity: [0.2, 0.35, 0.2],
+        }}
+        transition={{ duration: 12, repeat: Infinity, delay: 3 }}
       />
       
       <div className="max-w-3xl mx-auto text-center relative">
@@ -40,7 +48,7 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
           />
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text gradient-text">
             Let's Connect
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto">
@@ -58,7 +66,7 @@ export function Contact() {
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button 
               size="lg" 
-              className="group bg-foreground text-background hover:bg-foreground/90 border-0 px-8"
+              className="group btn-sage px-8"
               data-testid="button-email-contact"
             >
               <Mail className="mr-2 h-4 w-4" />

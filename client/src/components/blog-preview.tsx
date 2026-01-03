@@ -48,7 +48,7 @@ export function BlogPreview() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-12 h-px bg-gradient-to-r from-foreground/30 to-transparent mb-4"
             />
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-2 glow-text">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-2 glow-text gradient-text">
               From the Blog
             </h2>
             <p className="text-muted-foreground text-lg">

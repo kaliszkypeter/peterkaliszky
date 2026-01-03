@@ -3,6 +3,9 @@ import { motion, useInView } from "framer-motion";
 import { ExternalLink, Sparkles, ShoppingCart, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import promptCrafterImg from "@assets/generated_images/prompt_crafter_ai_tool_interface.png";
+import cozyCaryPandaImg from "@assets/generated_images/e-commerce_shopping_cart_app.png";
+import cyberChatImg from "@assets/generated_images/cyber_chat_messaging_app.png";
 
 interface Project {
   title: string;
@@ -10,6 +13,7 @@ interface Project {
   url: string;
   techStack: string[];
   icon: typeof Sparkles;
+  image: string;
 }
 
 const projects: Project[] = [
@@ -19,6 +23,7 @@ const projects: Project[] = [
     url: "https://prompt-crafter.replit.app/",
     techStack: ["React", "TypeScript", "AI/LLM", "Tailwind CSS"],
     icon: Sparkles,
+    image: promptCrafterImg,
   },
   {
     title: "Cozy Cart Panda",
@@ -26,6 +31,7 @@ const projects: Project[] = [
     url: "https://cozy-cart-panda.lovable.app",
     techStack: ["React", "TypeScript", "Lovable", "E-commerce"],
     icon: ShoppingCart,
+    image: cozyCaryPandaImg,
   },
   {
     title: "Cyber Chat Webhook",
@@ -33,6 +39,7 @@ const projects: Project[] = [
     url: "https://cyber-chat-webhook-kaliszkypeter.replit.app",
     techStack: ["React", "TypeScript", "WebSockets", "Webhooks"],
     icon: MessageSquare,
+    image: cyberChatImg,
   },
 ];
 
@@ -79,50 +86,64 @@ export function Projects() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="glass-card p-6 rounded-2xl glow-border group flex flex-col h-full"
+              className="glass-card rounded-2xl glow-border group flex flex-col h-full overflow-hidden"
             >
-              <div className="flex items-start justify-between mb-4">
-                <motion.div 
-                  className="p-3 rounded-xl bg-foreground/5 border border-foreground/10 group-hover:bg-foreground/10 transition-colors duration-300"
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <project.icon className="h-6 w-6 text-foreground/70" />
-                </motion.div>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-testid={`link-project-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  <Button 
-                    size="icon" 
-                    variant="ghost"
-                    className="opacity-60 group-hover:opacity-100 transition-opacity"
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative overflow-hidden"
+                data-testid={`link-project-image-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <div className="aspect-video overflow-hidden">
+                  <motion.img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </a>
+              
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <project.icon className="h-4 w-4 text-foreground/50" />
+                    <h3 className="font-semibold text-lg group-hover:text-foreground transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid={`link-project-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    <ExternalLink className="h-4 w-4" />
-                  </Button>
-                </a>
-              </div>
-              
-              <h3 className="font-semibold text-lg mb-2 group-hover:text-foreground transition-colors">
-                {project.title}
-              </h3>
-              
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">
-                {project.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-foreground/5">
-                {project.techStack.map((tech) => (
-                  <Badge
-                    key={tech}
-                    variant="secondary"
-                    className="text-xs bg-foreground/5 border-foreground/10"
-                  >
-                    {tech}
-                  </Badge>
-                ))}
+                    <Button 
+                      size="icon" 
+                      variant="ghost"
+                      className="opacity-60 group-hover:opacity-100 transition-opacity h-8 w-8"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </Button>
+                  </a>
+                </div>
+                
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">
+                  {project.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-foreground/5">
+                  {project.techStack.map((tech) => (
+                    <Badge
+                      key={tech}
+                      variant="secondary"
+                      className="text-xs bg-foreground/5 border-foreground/10"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

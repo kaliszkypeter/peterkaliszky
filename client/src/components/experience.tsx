@@ -58,6 +58,20 @@ const experiences: Experience[] = [
       "Managed the Internship Case Study team.",
     ],
   },
+  {
+    id: "5",
+    company: "GE Capital",
+    role: "IT Release & Portfolio Manager Intern",
+    period: "Mar 2012 - Mar 2013",
+    location: "ge.com",
+    description: [
+      "Working on Budapest Bank's small (below 5M HUF) IT development portfolio.",
+      "Managing and administrating the IT project portfolio.",
+      "Making monthly and weekly reports to the management.",
+      "Defining business ideas, prioritising IT demands.",
+      "Scheduling and reporting releases.",
+    ],
+  },
 ];
 
 const education = [

@@ -9,6 +9,7 @@ const navItems = [
   { label: "Work", href: "/#work" },
   { label: "Experience", href: "/#experience" },
   { label: "AI", href: "/#ai" },
+  { label: "Projects", href: "/#projects" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -40,19 +41,22 @@ export function Header() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "glass-subtle"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="max-w-6xl mx-auto px-6 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`max-w-3xl mx-auto px-4 py-2.5 rounded-full transition-all duration-500 ${
+          isScrolled
+            ? "bg-background/60 dark:bg-background/40 backdrop-blur-xl border border-foreground/[0.08] shadow-lg shadow-black/[0.03] dark:shadow-black/[0.1]"
+            : "bg-background/30 dark:bg-background/20 backdrop-blur-md border border-transparent"
+        }`}
+      >
         <div className="flex items-center justify-between gap-4">
           <Link href="/" data-testid="link-home">
             <motion.span
-              className="font-serif text-xl font-semibold cursor-pointer"
-              whileHover={{ scale: 1.02 }}
+              className="font-serif text-lg font-semibold cursor-pointer px-2"
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               PK
@@ -60,24 +64,27 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1 flex-wrap">
+          <div className="hidden md:flex items-center gap-0.5 flex-wrap">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => handleNavClick(item.href)}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground px-3 h-8"
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                 >
                   {item.label}
                 </Button>
               </Link>
             ))}
-            <ThemeToggle />
+            <div className="ml-1 pl-2 border-l border-foreground/10">
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-1">
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -85,28 +92,31 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="button-mobile-menu"
               aria-label="Toggle menu"
+              className="h-8 w-8"
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
           </div>
         </div>
+      </motion.nav>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden mt-4 pb-4"
-            >
-              <div className="flex flex-col gap-2">
+      {/* Mobile Menu - Floating below navbar */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden max-w-3xl mx-auto mt-2"
+          >
+            <div className="bg-background/80 dark:bg-background/60 backdrop-blur-xl border border-foreground/[0.08] rounded-2xl p-3 shadow-lg">
+              <div className="flex flex-col gap-1">
                 {navItems.map((item) => (
                   <Link key={item.href} href={item.href}>
                     <Button
                       variant="ghost"
-                      className="w-full justify-start"
+                      className="w-full justify-start h-10 text-muted-foreground hover:text-foreground"
                       onClick={() => handleNavClick(item.href)}
                       data-testid={`link-mobile-nav-${item.label.toLowerCase()}`}
                     >
@@ -115,10 +125,10 @@ export function Header() {
                   </Link>
                 ))}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -1,6 +1,6 @@
 import { useRef, useState, type ReactNode, type MouseEvent } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { ExternalLink, Sparkles, ShoppingCart, MessageSquare } from "lucide-react";
+import { ExternalLink, Sparkles, ShoppingCart, MessageSquare, Bot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import promptCrafterImg from "@assets/generated_images/prompt_crafter_ai_tool_interface.png";
@@ -116,6 +116,21 @@ export function Projects() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
+          <motion.div 
+            className="inline-flex items-center gap-2 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Bot className="h-4 w-4 text-muted-foreground" />
+            <Badge 
+              variant="secondary" 
+              className="badge-teal"
+            >
+              AI Corner
+            </Badge>
+          </motion.div>
+          
           <motion.div
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
@@ -123,7 +138,7 @@ export function Projects() {
             className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mb-6"
           />
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text gradient-text">
-            Projects
+            My Projects
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Side projects and experiments I've built to explore new technologies

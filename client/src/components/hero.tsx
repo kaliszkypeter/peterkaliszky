@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type MouseEvent } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MapPin, Mail, ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function MouseFollowText({ children, className }: { children: string; className?: string }) {
@@ -197,27 +197,6 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
-        >
-          <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            <MapPin className="h-4 w-4" />
-            <span>Budapest, Hungary</span>
-          </div>
-          <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/50" />
-          <a
-            href="mailto:kaliszky.peter@gmail.com"
-            className="flex items-center gap-2 text-muted-foreground text-sm hover:text-foreground transition-colors duration-300"
-            data-testid="link-email"
-          >
-            <Mail className="h-4 w-4" />
-            <span>kaliszky.peter@gmail.com</span>
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button

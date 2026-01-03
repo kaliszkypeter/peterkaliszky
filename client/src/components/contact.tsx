@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Mail, Phone, MapPin, Linkedin, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, Linkedin, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Contact() {
@@ -84,17 +84,6 @@ export function Contact() {
               <Mail className="mr-2 h-4 w-4" />
               Send an Email
               <ArrowUpRight className="ml-2 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Button>
-          </a>
-          <a href="tel:+36306188161">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="px-8"
-              data-testid="button-phone-contact"
-            >
-              <Phone className="mr-2 h-4 w-4" />
-              +36 30 618 8161
             </Button>
           </a>
         </motion.div>

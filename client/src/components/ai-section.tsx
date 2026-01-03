@@ -85,7 +85,7 @@ export function AISection() {
           </motion.div>
           
           <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 glow-text">
-            AI-Powered Product Innovation
+            AI Corner
           </h2>
           
           <motion.div

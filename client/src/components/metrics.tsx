@@ -91,7 +91,6 @@ export function Metrics() {
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
       />
-      
       <motion.div style={{ opacity }} className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -109,9 +108,8 @@ export function Metrics() {
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text gradient-text">
             Impact & Results
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Delivering measurable outcomes through strategic product leadership
-          </p>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Delivering measurable outcomes through strategic product management
+</p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
@@ -141,7 +139,6 @@ export function Metrics() {
           ))}
         </div>
       </motion.div>
-      
       {/* Bottom decorative line */}
       <motion.div 
         className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent"

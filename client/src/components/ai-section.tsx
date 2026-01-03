@@ -44,7 +44,6 @@ export function AISection() {
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
       />
-      
       <div className="max-w-6xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -62,9 +61,8 @@ export function AISection() {
             <Badge 
               variant="secondary" 
               className="badge-teal"
-            >
-              AI Projects
-            </Badge>
+            >AI Corner
+</Badge>
           </motion.div>
           
           <motion.div

@@ -109,13 +109,11 @@ export function Hero() {
         className="absolute inset-0 dot-grid"
         style={{ y: dotGridY }}
       />
-      
       {/* Parallax gradient mesh background */}
       <motion.div 
         className="absolute inset-0 gradient-mesh" 
         style={{ y: bgY }}
       />
-      
       {/* Floating orbs with teal accent and parallax */}
       <motion.div 
         className="absolute top-1/4 left-1/4 w-96 h-96 floating-orb floating-orb-teal"
@@ -141,7 +139,6 @@ export function Hero() {
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 2 }}
       />
-      
       <motion.div 
         style={{ opacity, scale, y }}
         className="max-w-4xl mx-auto text-center relative z-10"
@@ -187,11 +184,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed"
-        >
-          Product Owner with 6+ years of experience turning complex payment systems 
-          into seamless digital products. Passionate about discovery, strategy, 
-          and AI-driven product management.
-        </motion.p>
+        >Product Owner with 8+ years of experience turning complex payment systems into seamless digital products. Passionate about discovery, strategy, and AI-driven product management.</motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -234,7 +227,6 @@ export function Hero() {
           className="w-16 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent mx-auto mt-12"
         />
       </motion.div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

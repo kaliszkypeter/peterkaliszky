@@ -1,7 +1,51 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type MouseEvent } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPin, Mail, ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+function MouseFollowText({ children, className }: { children: string; className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setMousePos({ x: -1000, y: -1000 });
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative inline-block cursor-default ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground">
+        {children}
+      </span>
+      <span
+        className="absolute inset-0 z-20 bg-clip-text text-transparent pointer-events-none transition-opacity duration-300"
+        style={{
+          backgroundImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, hsl(170 62% 50%), transparent 70%)`,
+          opacity: isHovering ? 1 : 0,
+        }}
+      >
+        {children}
+      </span>
+    </div>
+  );
+}
 
 const roles = [
   "Product Owner",
@@ -59,7 +103,7 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden hero-teal-hover">
+    <section className="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden">
       {/* Parallax dot grid background */}
       <motion.div 
         className="absolute inset-0 dot-grid"
@@ -115,8 +159,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 glow-text gradient-text-teal">
-            Peter Kaliszky
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 glow-text">
+            <MouseFollowText>Peter Kaliszky</MouseFollowText>
           </h1>
         </motion.div>
 

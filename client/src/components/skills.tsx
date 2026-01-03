@@ -40,7 +40,6 @@ export function Skills() {
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
       />
-      
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -58,9 +57,7 @@ export function Skills() {
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 glow-text gradient-text">
             Skills & Tools
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Technologies and methodologies I work with daily
-          </p>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Technologies and tools I work with daily</p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">

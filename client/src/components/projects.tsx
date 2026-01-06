@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import promptCrafterImg from "@assets/Screenshot_2026-01-03_at_23.14.50_1767478493952.png";
 import cozyCaryPandaImg from "@assets/Screenshot_2026-01-03_at_23.15.34_1767478537367.png";
 import cyberChatImg from "@assets/Screenshot_2026-01-03_at_23.23.17_1767479017881.png";
+import hubImg from "@assets/focusbubble.jpeg";
 
 function TiltCard({ children, className }: { children: ReactNode; className?: string }) {
   const [rotateX, setRotateX] = useState(0);
@@ -56,25 +57,34 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Prompt Crafter",
-    description: "An AI-powered tool for crafting and refining prompts. Helps users create more effective prompts for large language models with structured templates and best practices.",
+    description: "I built this for myself to refine prompts using Anthropic’s prompting guidelines. It supports Google OAuth to unlock more free improvements, pulls a prompt library from a Notion database, and is built with Replit.",
     url: "https://prompt-crafter.replit.app/",
-    techStack: ["React", "TypeScript", "AI/LLM", "Tailwind CSS"],
+    techStack: ["Replit", "Notion", "OAuth"],
     icon: Sparkles,
     image: promptCrafterImg,
   },
   {
-    title: "Cozy Cart Panda",
-    description: "A modern e-commerce application with a clean, intuitive shopping experience. Features product browsing, cart management, and a streamlined checkout flow.",
+    title: "Tech Demo Shop",
+    description: "I built this to run Barion test payments quickly without touching the API. It supports dark mode and can switch between Barion's test and production environments.",
     url: "https://cozy-cart-panda.lovable.app",
-    techStack: ["React", "TypeScript", "Lovable", "E-commerce"],
+    techStack: ["Lovable", "Barion API"],
     icon: ShoppingCart,
     image: cozyCaryPandaImg,
   },
   {
-    title: "Cyber Chat Webhook",
-    description: "A real-time chat application with webhook integration capabilities. Enables seamless communication and automated message handling for various use cases.",
+    title: "Hub",
+    description:
+      "Built a prototype of an AI first collaboration platform. Collaboration platforms like Slack, Microsoft Teams, and Zoom keep us talking but don’t prioritize focus or streamline how we work, there’s no seamless way to balance connection with concentration. We deserve better—a digital workspace that cuts the clutter, boosts productivity, and keeps teams in sync—a platform that prioritizes focus while keeping us connected.",
+    url: "https://focusbubble.lovable.app",
+    techStack: ["Lovable", "Cursor"],
+    icon: Bot,
+    image: hubImg,
+  },
+  {
+    title: "Neon Chat",
+    description: "A chat app I built to test n8n integrations. It lets you set different conversation tones.",
     url: "https://cyber-chat-webhook-kaliszkypeter.replit.app",
-    techStack: ["React", "TypeScript", "WebSockets", "Webhooks"],
+    techStack: ["Replit", "n8n", "OpenAI API"],
     icon: MessageSquare,
     image: cyberChatImg,
   },
@@ -141,7 +151,7 @@ export function Projects() {
             My Projects
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Side projects and experiments I've built to explore new technologies
+            Side projects and prototypes exploring vibe coding and AI-powered product building
           </p>
         </motion.div>
 
@@ -205,7 +215,7 @@ export function Projects() {
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className={`text-xs ${techIndex === 0 ? 'badge-teal' : 'bg-foreground/5 border-foreground/10'}`}
+                          className="text-xs bg-foreground/5 border-foreground/10"
                         >
                           {tech}
                         </Badge>

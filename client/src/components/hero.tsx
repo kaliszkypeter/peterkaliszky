@@ -37,8 +37,8 @@ function MouseFollowText({ children, className }: { children: string; className?
       <span
         className="absolute inset-0 z-20 bg-clip-text text-transparent pointer-events-none transition-opacity duration-300"
         style={{
-          backgroundImage: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, hsl(170 62% 50%), transparent 70%)`,
-          opacity: isHovering ? 1 : 0,
+          backgroundImage: `radial-gradient(circle var(--name-hover-radius) at ${mousePos.x}px ${mousePos.y}px, hsl(var(--teal) / 0.55), transparent var(--name-hover-falloff))`,
+          opacity: isHovering ? "var(--name-hover-opacity)" : 0,
         }}
       >
         {children}
@@ -49,9 +49,9 @@ function MouseFollowText({ children, className }: { children: string; className?
 
 const roles = [
   "Product Owner",
-  "Payment Systems",
-  "Digital Products",
-  "AI Innovation",
+  "Payment Expert",
+  "AI Enthusiast",
+  "Vibe Coder",
 ];
 
 export function Hero() {
@@ -194,8 +194,9 @@ export function Hero() {
         >
           <Button
             size="lg"
+            variant="ghost"
             onClick={scrollToProjects}
-            className="bg-foreground text-background hover:bg-foreground/90 px-8"
+            className="bg-foreground text-background border border-transparent hover:bg-foreground/90 px-8"
             data-testid="button-view-work"
           >
             My Projects

@@ -64,7 +64,7 @@ export function Contact() {
             Let's Connect
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto">
-            Interested in working together or just want to chat about product management?
+            Interested in working together or just want to chat about product management or AI?
             I'd love to hear from you.
           </p>
         </motion.div>
@@ -78,7 +78,8 @@ export function Contact() {
           <a href="mailto:kaliszky.peter@gmail.com">
             <Button 
               size="lg" 
-              className="group bg-foreground text-background hover:bg-foreground/90 px-8"
+              variant="ghost"
+              className="group bg-foreground text-background border border-transparent hover:bg-foreground/90 px-8"
               data-testid="button-email-contact"
             >
               <Mail className="mr-2 h-4 w-4" />

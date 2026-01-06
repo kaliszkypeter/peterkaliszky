@@ -4,6 +4,9 @@
 
 /* LIGHT MODE */
 :root {
+  --name-hover-opacity: 0.85;
+  --name-hover-radius: 120px;
+  --name-hover-falloff: 70%;
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
   --opaque-button-border-intensity: -8;
@@ -93,6 +96,9 @@
 }
 
 .dark {
+  --name-hover-opacity: 0.65;
+  --name-hover-radius: 95px;
+  --name-hover-falloff: 60%;
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
   --opaque-button-border-intensity: 9;

@@ -113,7 +113,7 @@ export function ExperienceSection() {
             Experience & Education
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A journey through product ownership and technology leadership
+            From early project management roles to product development
           </p>
         </motion.div>
 
@@ -165,7 +165,7 @@ export function ExperienceSection() {
                         </a>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="shrink-0 bg-foreground/5 border-foreground/10">
+                    <Badge variant="secondary" className="shrink-0 w-fit self-start sm:self-auto bg-foreground/5 border-foreground/10">
                       {exp.period}
                     </Badge>
                   </div>
@@ -189,14 +189,14 @@ export function ExperienceSection() {
                       animate={isInView ? { opacity: 1 } : {}}
                       transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                     >
-                      <p className="text-sm font-medium mb-3">Key Achievements</p>
+                      <p className="text-sm font-medium text-muted-foreground mb-3">Key Achievements</p>
                       <ul className="space-y-2">
                         {exp.achievements.map((achievement, i) => (
                           <li
                             key={i}
                             className="text-sm text-muted-foreground flex items-start gap-3"
                           >
-                            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-foreground/50 shrink-0" />
+                            <span className="mt-2 w-1 h-1 rounded-full bg-foreground/30 shrink-0" />
                             {achievement}
                           </li>
                         ))}

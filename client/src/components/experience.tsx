@@ -160,8 +160,10 @@ export function ExperienceSection() {
                           rel="noopener noreferrer"
                           className="hover:text-foreground transition-colors inline-flex items-center gap-1"
                           data-testid={`link-company-${exp.id}`}
+                          aria-label={`Visit ${exp.location}`}
                         >
                           <ArrowUpRight className="h-3 w-3" />
+                          <span className="sr-only">{`Visit ${exp.location}`}</span>
                         </a>
                       </div>
                     </div>

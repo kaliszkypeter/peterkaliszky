@@ -195,13 +195,16 @@ export function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         data-testid={`link-project-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                        aria-label={`Open ${project.title}`}
                       >
                         <Button 
                           size="icon" 
                           variant="ghost"
                           className="opacity-60 group-hover:opacity-100 transition-opacity"
+                          aria-label={`Open ${project.title}`}
                         >
                           <ExternalLink className="h-4 w-4" />
+                          <span className="sr-only">{`Open ${project.title}`}</span>
                         </Button>
                       </a>
                     </div>
